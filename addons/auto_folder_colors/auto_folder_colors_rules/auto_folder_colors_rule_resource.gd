@@ -46,6 +46,7 @@ const COLOR_OPTIONS := "red,orange,yellow,green,teal,blue,purple,pink,gray"
 	"localization": "green",
 	"modules": "yellow",
 	"music": "green",
+	"renders": "red",
 	"prefs": "teal",
 	"resources": "blue",
 	"shaders": "blue",
