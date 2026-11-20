@@ -66,6 +66,16 @@ const MATCH_SUBSTRING := true
 ## Применять цвета автоматически при включении плагина?
 const AUTO_APPLY_ON_ENABLE := false
 
+## auto_folder_colors_rules_resource.folder_color_rules
+## auto_folder_colors_rules_resource.match_substring
+## auto_folder_colors_rules_resource.auto_apply_on_enable
+## auto_folder_colors_rules_resource.preferred_language
+var auto_folder_colors_rules_resource := preload("uid://ckjn5ryaxoj2i").new()
+
+var current_colors_rules: Dictionary[String, String] = COLORS_RULES
+var current_match_substring: bool = MATCH_SUBSTRING
+var current_auto_apply_on_enable: bool = AUTO_APPLY_ON_ENABLE
+
 ## Для перевода сообщений
 var preferred_language: String = ""
 
@@ -83,6 +93,11 @@ func _disable_plugin() -> void:
 
 
 func _enter_tree() -> void:
+
+	current_colors_rules = auto_folder_colors_rules_resource.folder_color_rules
+	current_match_substring = auto_folder_colors_rules_resource.match_substring
+	current_auto_apply_on_enable = auto_folder_colors_rules_resource.auto_apply_on_enable
+	preferred_language = auto_folder_colors_rules_resource.preferred_language
 
 	add_tool_menu_item("Apply Auto Folder Colors", _on_apply_colors)
 	if AUTO_APPLY_ON_ENABLE:
@@ -114,8 +129,8 @@ func _on_apply_colors() -> void:
 
 	#print(AUTO_FOLDER_COLORS_RULES_RESOURCE.folder_color_rules)
 	_apply_colors()
-
-	preferred_language = OS.get_locale_language()
+	if preferred_language == "":
+		preferred_language = OS.get_locale_language()
 	if preferred_language == "ru":
 		print_rich("[b][Auto Folder Colors][/b] Цвета применены к папкам и сохранены в project.godot.")
 	else:
@@ -124,7 +139,6 @@ func _on_apply_colors() -> void:
 
 ## Функция для сохранения цветов в project.godot
 func _apply_colors() -> void:
-	preferred_language = OS.get_locale_language()
 	var folder_colors: Dictionary = ProjectSettings.get_setting(
 		"file_customization/folder_colors", {}
 	).duplicate()
@@ -181,14 +195,14 @@ func _scan_directory(path: String, folder_colors: Dictionary, changed: bool) -> 
 ## Но для текущих целей подойдёт TODO
 func _get_color_for_folder(folder_name: String) -> String:
 	var lower_name: String = folder_name.to_lower()
-	for keyword: String in COLORS_RULES:
+	for keyword: String in current_colors_rules:
 		var key: String = keyword.to_lower()
 		if MATCH_SUBSTRING:
 			if lower_name.contains(key):
-				return COLORS_RULES[keyword]
+				return current_colors_rules[keyword]
 		else:
 			if lower_name == key:
-				return COLORS_RULES[keyword]
+				return current_colors_rules[keyword]
 	return ""
 
 
@@ -198,7 +212,7 @@ func _get_color_for_folder2(folder_name: String) -> String:
 	var best_match: String= ""
 	var best_length: int = -1
 
-	for keyword: String in COLORS_RULES:
+	for keyword: String in current_colors_rules:
 		var key: String = keyword.to_lower()
 		var is_match: bool = false
 		if MATCH_SUBSTRING:
@@ -210,5 +224,5 @@ func _get_color_for_folder2(folder_name: String) -> String:
 			best_match = keyword
 			best_length = key.length()
 	if best_match != "":
-		return COLORS_RULES[best_match]
+		return current_colors_rules[best_match]
 	return ""
