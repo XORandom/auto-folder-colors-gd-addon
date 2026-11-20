@@ -1,4 +1,6 @@
 # AutoFolderColors
+[![Release to Godot Asset Library](https://github.com/XORandom/auto-folder-colors-gd-addon/actions/workflows/release_to_asset_library.yml/badge.svg)](https://github.com/XORandom/auto-folder-colors-gd-addon/actions/workflows/release_to_asset_library.yml)
+
 I made this addon because I often had to colorize my folders for ease of navigation. And when transferring folders to another project, the color scheme was reset.
 
 ## How to use
