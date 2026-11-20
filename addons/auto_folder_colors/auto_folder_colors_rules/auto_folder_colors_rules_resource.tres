@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AutoFolderColorsResource" format=3 uid="uid://cpehbfjjpof5r"]
+
+[ext_resource type="Script" uid="uid://ckjn5ryaxoj2i" path="res://addons/auto_folder_colors/auto_folder_colors_rules/auto_folder_colors_rule_resource.gd" id="1_15egb"]
+
+[resource]
+script = ExtResource("1_15egb")
+preferred_language = "ru"
+metadata/_custom_type_script = "uid://ckjn5ryaxoj2i"
