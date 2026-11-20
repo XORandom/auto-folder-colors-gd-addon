@@ -56,6 +56,7 @@ const COLOR_OPTIONS := "red,orange,yellow,green,teal,blue,purple,pink,gray"
 	get:
 		return folder_color_rules
 	set(value):
+		print(value)
 		## Фильтруем недопустимые значения
 		var cleaned : Dictionary[String, String]= {}
 		for key in value:
