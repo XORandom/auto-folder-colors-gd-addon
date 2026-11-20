@@ -28,9 +28,10 @@ const COLOR_OPTIONS := "red,orange,yellow,green,teal,blue,purple,pink,gray"
 ## Более точное совпадение правил в приоритете [br]
 ## Ключи отсортированы по алфавиту с помощью онлайн сервисов [br]
 @export var folder_color_rules: Dictionary[String, String] = {
+	"_actions": "teal",
 	"addons": "gray",
 	"asset": "red",
-	"assets": "gray",
+	"assets": "red",
 	"audio": "green",
 	"autoloads": "gray",
 	"config": "gray",
@@ -49,7 +50,8 @@ const COLOR_OPTIONS := "red,orange,yellow,green,teal,blue,purple,pink,gray"
 	"shaders": "blue",
 	"sounds": "green",
 	"system": "orange",
-	"test": "yellow"
+	"_templates": "gray",
+	"test": "yellow",
 	}:
 	get:
 		return folder_color_rules

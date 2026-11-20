@@ -32,6 +32,7 @@ const NAMED_COLORS := {
 ## В случае коллизии выигрывет более длинное совпадение [br]
 ## Ключи отсортированы по алфавиту с помощью онлайн сервисов [br]
 const COLORS_RULES : Dictionary[String, String] = {
+	"_actions": "teal",
 	"addons": "gray",
 	"asset": "red",
 	"assets": "red",
@@ -53,6 +54,7 @@ const COLORS_RULES : Dictionary[String, String] = {
 	"shaders": "blue",
 	"sounds": "green",
 	"system": "orange",
+	"_templates": "gray",
 	"test": "yellow",
 }
 
