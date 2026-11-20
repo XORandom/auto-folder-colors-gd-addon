@@ -4,29 +4,5 @@
 
 [resource]
 script = ExtResource("1_15egb")
-folder_color_rules = Dictionary[String, String]({
-"addons": "red",
-"asset": "red",
-"assets": "gray",
-"audio": "green",
-"autoloads": "gray",
-"config": "gray",
-"configuration": "orange",
-"doc": "purple",
-"docs": "purple",
-"examples": "pink",
-"font": "purple",
-"fonts": "purple",
-"game_ready": "teal",
-"localization": "green",
-"modules": "yellow",
-"music": "green",
-"prefs": "teal",
-"resources": "blue",
-"shaders": "blue",
-"sounds": "green",
-"system": "orange",
-"test": "yellow"
-})
 preferred_language = "ru"
 metadata/_custom_type_script = "uid://ckjn5ryaxoj2i"
