@@ -52,7 +52,6 @@ const COLOR_OPTIONS := "red,orange,yellow,green,teal,blue,purple,pink,gray"
 	"sounds": "green",
 	"system": "orange",
 	"_templates": "gray",
-	"test": "yellow",
 	}:
 	get:
 		return folder_color_rules
