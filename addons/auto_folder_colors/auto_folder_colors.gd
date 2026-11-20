@@ -9,21 +9,7 @@ extends EditorPlugin
 # Проверять в реальном времени изменения в файловой системе
 # Создание и переименовнаие папки TODO
 
-#region TODO в будущем сделать совместимым с Fancy Folder Colors
-## Цвета папок в Godot
-## Не используется пока, но пригодится для быстрого понимания цвета
-const NAMED_COLORS := {
-	"red":    Color(1.0, 0.271, 0.271),
-	"orange": Color(1.0, 0.561, 0.271),
-	"yellow": Color(1.0, 0.890, 0.271),
-	"green":  Color(0.502, 1.0, 0.271),
-	"teal":   Color(0.271, 1.0, 0.635),
-	"blue":   Color(0.271, 0.843, 1.0),
-	"purple": Color(0.502, 0.271, 1.0),
-	"pink":   Color(1.0, 0.271, 0.588),
-	"gray":   Color(0.616, 0.616, 0.616),
-}
-#endregion
+
 
 
 ## auto_folder_colors_rules_resource.folder_color_rules
@@ -57,7 +43,7 @@ func _enter_tree() -> void:
 	current_match_substring = auto_folder_colors_rules_resource.match_substring
 	current_auto_apply_on_enable = auto_folder_colors_rules_resource.auto_apply_on_enable
 	preferred_language = auto_folder_colors_rules_resource.preferred_language
-	print("_enter_tree", current_colors_rules, current_match_substring, current_auto_apply_on_enable, preferred_language)
+	#print("_enter_tree", current_colors_rules, current_match_substring, current_auto_apply_on_enable, preferred_language)
 
 	add_tool_menu_item("Apply Auto Folder Colors", _on_apply_colors)
 	if current_auto_apply_on_enable:
@@ -86,16 +72,7 @@ func _exit_tree() -> void:
 
 ## Срабатывает при нажатии кнопки
 func _on_apply_colors() -> void:
-	current_colors_rules = auto_folder_colors_rules_resource.folder_color_rules
-	current_match_substring = auto_folder_colors_rules_resource.match_substring
-	current_auto_apply_on_enable = auto_folder_colors_rules_resource.auto_apply_on_enable
-	preferred_language = auto_folder_colors_rules_resource.preferred_language
-	print("_on_apply_colors", current_colors_rules, current_match_substring, current_auto_apply_on_enable, preferred_language)
-
-	#print(AUTO_FOLDER_COLORS_RULES_RESOURCE.folder_color_rules)
 	_apply_colors()
-	if preferred_language == "":
-		preferred_language = OS.get_locale_language()
 	if preferred_language == "ru":
 		print_rich("[b][Auto Folder Colors][/b] Цвета применены к папкам и сохранены в project.godot.")
 	else:
@@ -108,18 +85,17 @@ func _apply_colors() -> void:
 	current_match_substring = auto_folder_colors_rules_resource.match_substring
 	current_auto_apply_on_enable = auto_folder_colors_rules_resource.auto_apply_on_enable
 	preferred_language = auto_folder_colors_rules_resource.preferred_language
-	print("_apply_colors", current_colors_rules, current_match_substring, current_auto_apply_on_enable, preferred_language)
-
-
+	#print("_apply_colors", current_colors_rules, current_match_substring, current_auto_apply_on_enable, preferred_language)
+	if preferred_language == "":
+		preferred_language = OS.get_locale_language()
 	var folder_colors: Dictionary = ProjectSettings.get_setting(
 		"file_customization/folder_colors", {}
 	).duplicate()
 
-
-
 	var root := "res://"
 	_scan_directory(root, folder_colors, changed)
 
+#region changed
 	#if changed:
 	ProjectSettings.set_setting("file_customization/folder_colors", folder_colors)
 	ProjectSettings.save()
@@ -129,6 +105,7 @@ func _apply_colors() -> void:
 
 	## Пересканируем, чтобы эффект был сразу
 	EditorInterface.get_resource_filesystem().scan()
+#endregion
 
 
 func _scan_directory(path: String, folder_colors: Dictionary, changed: bool) -> void:
