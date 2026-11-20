@@ -71,7 +71,10 @@ const COLOR_OPTIONS := "red,orange,yellow,green,teal,blue,purple,pink,gray"
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name == &"folder_color_rules":
-		property.hint_string = "String;4/%d:%s" % [PROPERTY_HINT_ENUM, COLOR_OPTIONS]
+		property.hint_string =  "%d:;%d/%d:%s" % [
+			TYPE_STRING,
+			TYPE_STRING, PROPERTY_HINT_ENUM, COLOR_OPTIONS
+		]
 		property.hint = PROPERTY_HINT_DICTIONARY_TYPE
 	if property.name == &"preferred_language":
 		property.hint = PROPERTY_HINT_LOCALE_ID
