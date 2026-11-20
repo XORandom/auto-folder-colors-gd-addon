@@ -19,7 +19,6 @@ extends Resource
 	"gray",
 ) var default_color: String = "gray"
 
-
 #region folder_color_rules
 ## Разрешенные цвета, чтобы не допустить ошибку при вводе
 const COLOR_OPTIONS := "red,orange,yellow,green,teal,blue,purple,pink,gray"
@@ -31,7 +30,7 @@ const COLOR_OPTIONS := "red,orange,yellow,green,teal,blue,purple,pink,gray"
 @export var folder_color_rules: Dictionary[String, String] = {
 	"_actions": "teal",
 	"addons": "gray",
-	"asset": "red",
+	"_asset": "red",
 	"assets": "red",
 	"audio": "green",
 	"autoloads": "gray",
@@ -51,7 +50,7 @@ const COLOR_OPTIONS := "red,orange,yellow,green,teal,blue,purple,pink,gray"
 	"resources": "blue",
 	"shaders": "blue",
 	"sounds": "green",
-	"system": "orange",
+	"_system": "orange",
 	"_templates": "gray",
 	}:
 	get:

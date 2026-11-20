@@ -4,13 +4,10 @@ extends EditorPlugin
 ## AutoFolderColors
 ##
 ## by XORandom, 2026
-# TODO нужна панель настроек и все правила, чтобы не лезть в код
-# Сделать совместимым с Fancy Folder Colors https://godotengine.org/asset-library/asset/3859
+
+#TODO Сделать совместимым с Fancy Folder Colors https://godotengine.org/asset-library/asset/3859
 # Проверять в реальном времени изменения в файловой системе
-# Создание и переименовнаие папки TODO
-
-
-
+# Создание и переименование папки TODO
 
 ## auto_folder_colors_rules_resource.folder_color_rules
 ## auto_folder_colors_rules_resource.match_substring
@@ -28,22 +25,23 @@ var preferred_language: String = ""
 ## Есть ли изменение при сканировании
 var changed := false
 
+
+## Add autoloads here.
 func _enable_plugin() -> void:
-	# Add autoloads here.
 	pass
 
 
+## Remove autoloads here.
 func _disable_plugin() -> void:
-	# Remove autoloads here.
 	pass
 
 
+## Initialization of the plugin goes here.
 func _enter_tree() -> void:
 	current_colors_rules = auto_folder_colors_rules_resource.folder_color_rules
 	current_match_substring = auto_folder_colors_rules_resource.match_substring
 	current_auto_apply_on_enable = auto_folder_colors_rules_resource.auto_apply_on_enable
 	preferred_language = auto_folder_colors_rules_resource.preferred_language
-	#print("_enter_tree", current_colors_rules, current_match_substring, current_auto_apply_on_enable, preferred_language)
 
 	add_tool_menu_item("Apply Auto Folder Colors", _on_apply_colors)
 	if current_auto_apply_on_enable:
@@ -56,18 +54,13 @@ func _enter_tree() -> void:
 	#if not EditorInterface.get_resource_filesystem().filesystem_changed.is_connected(_apply_colors):
 		#EditorInterface.get_resource_filesystem().filesystem_changed.connect(_apply_colors)
 
-	# Initialization of the plugin goes here.
-	pass
 
-
+## Clean-up of the plugin goes here.
 func _exit_tree() -> void:
 	remove_tool_menu_item("Apply Auto Folder Colors")
 	# TODO подумать, как обновлять корректно, этот вариант слишком нагружает систему
 	#if EditorInterface.get_resource_filesystem().filesystem_changed.is_connected(_apply_colors):
 		#EditorInterface.get_resource_filesystem().filesystem_changed.disconnect(_apply_colors)
-
-	# Clean-up of the plugin goes here.
-	pass
 
 
 ## Срабатывает при нажатии кнопки
@@ -94,6 +87,7 @@ func _apply_colors() -> void:
 
 	var root := "res://"
 	_scan_directory(root, folder_colors, changed)
+
 
 #region changed
 	#if changed:
@@ -134,7 +128,6 @@ func _scan_directory(path: String, folder_colors: Dictionary, changed: bool) -> 
 						print_rich("Colored: {0} → [color={1}]{1}[/color]".format([store_path, color_name]))
 			## Рекурсивный вызов этого же метода
 			_scan_directory(full_path, folder_colors, changed)
-
 		file_name = dir.get_next()
 	dir.list_dir_end()
 
